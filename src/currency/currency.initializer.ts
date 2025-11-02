@@ -2,9 +2,6 @@ import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ExchangeRate } from './exchange-rate/entity/exchange_rate.entity';
-import { Setting } from 'src/setting/entity/setting.entity';
-import { SystemConfigDto } from 'src/setting/dto/system-cofig.dto';
-import { LEGAL_TENDER_CURRENCY_CODE } from './core/currency-codes';
 
 /**
  * 货币模块初始化器
@@ -20,8 +17,6 @@ export class CurrencyInitializer implements OnApplicationBootstrap {
   constructor(
     @InjectRepository(ExchangeRate)
     private readonly exchangeRateRepository: Repository<ExchangeRate>,
-    @InjectRepository(Setting)
-    private readonly settingRepository: Repository<Setting>,
   ) {}
 
   /**
@@ -29,41 +24,12 @@ export class CurrencyInitializer implements OnApplicationBootstrap {
    */
   async onApplicationBootstrap(): Promise<void> {
     try {
-      const setting = await this.getOrCreateSetting();
-      const hasJsonFlag = setting.config?.init?.currency === true;
-      if (hasJsonFlag || setting.currencyInitialized) {
-        this.logger.log(
-          '[Currency Init] 设置标记已完成初始化，跳过。',
-          'CurrencyInitializer',
-        );
-        return;
-      }
-
-      // 初始化四个汇率对（其他货币对玻利瓦尔）
+      // 直接初始化四个汇率对（其他货币对玻利瓦尔）
       await this.ensureInitialExchangeRates();
-
-      // 标记已完成
-      setting.currencyInitialized = true;
-      await this.settingRepository.save(setting);
       this.logger.log('[Currency Init] 货币初始化完成');
     } catch (error) {
       this.logger.error('[Currency Init] 初始化失败', error);
     }
-  }
-
-  /**
-   * 获取或创建系统设置记录
-   */
-  private async getOrCreateSetting(): Promise<Setting> {
-    let setting = await this.settingRepository.findOne({ where: {} });
-    if (!setting) {
-      setting = this.settingRepository.create({
-        config: {} as SystemConfigDto,
-        currencyInitialized: false,
-      });
-      setting = await this.settingRepository.save(setting);
-    }
-    return setting;
   }
 
   /**

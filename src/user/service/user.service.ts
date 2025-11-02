@@ -5,11 +5,11 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, ILike, Repository } from 'typeorm';
-import { User } from './entity/user.entity';
+import { User } from '../entity/user.entity';
 import { RegisterUserDto } from 'src/auth/dto/register-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { QueryUserDto } from './dto/query-user.dto';
-import { QueryUserResponseDto } from './dto/query-user-response.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { QueryUserDto } from '../dto/query-user.dto';
+import { QueryUserResponseDto } from '../dto/query-user-response.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()

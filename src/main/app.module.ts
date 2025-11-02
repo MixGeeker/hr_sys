@@ -3,10 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from 'src/database/database.module';
-import { SettingModule } from 'src/setting/setting.module';
 import * as fs from 'fs';
 import * as path from 'path';
-import { SystemSettings } from 'src/setting/types/setting.types';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ClsModule } from 'nestjs-cls';
@@ -56,7 +54,6 @@ export class AppModule {
         serveRoot: '/uploads',
       }),
       DatabaseModule,
-      SettingModule,
     ];
 
     // if (isInitialized) {

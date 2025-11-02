@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ExchangeRate } from './exchange-rate/entity/exchange_rate.entity';
-import { Setting } from 'src/setting/entity/setting.entity';
 import { CurrencyInitializer } from './currency.initializer';
 import { CurrencyCoreModule } from './core/currency-core.module';
 import { ExchangeRateModule } from './exchange-rate/exchange-rate.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Setting, ExchangeRate]),
+    TypeOrmModule.forFeature([ExchangeRate]),
     CurrencyCoreModule, // 核心货币模块
     ExchangeRateModule, // 汇率子模块
   ],

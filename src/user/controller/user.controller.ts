@@ -10,7 +10,7 @@ import {
   Query,
   Request,
 } from '@nestjs/common';
-import { UserService } from './user.service';
+import { UserService } from '../service/user.service';
 import {
   ApiBearerAuth,
   ApiBody,
@@ -19,11 +19,11 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { User } from './entity/user.entity';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { CreateUserDto } from './dto/create-user.dto';
-import { QueryUserDto } from './dto/query-user.dto';
-import { QueryUserResponseDto } from './dto/query-user-response.dto';
+import { User } from '../entity/user.entity';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { QueryUserDto } from '../dto/query-user.dto';
+import { QueryUserResponseDto } from '../dto/query-user-response.dto';
 
 @ApiTags('User')
 @ApiBearerAuth() // 标记这个 Controller 下的所有接口都需要 Bearer Token

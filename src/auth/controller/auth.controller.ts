@@ -6,8 +6,8 @@ import {
   UseGuards,
   Request,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { RegisterUserDto } from './dto/register-user.dto';
+import { AuthService } from '../service/auth.service';
+import { RegisterUserDto } from '../dto/register-user.dto';
 import {
   ApiBearerAuth,
   ApiOperation,
@@ -15,7 +15,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { User } from 'src/user/entity/user.entity';
-import { LoginUserDto } from './dto/login-user.dto';
+import { LoginUserDto } from '../dto/login-user.dto';
 import { Public } from 'src/common/decorators/public.decorator';
 import { RefreshTokenGuard } from 'src/common/guards/jwt-refresh.guard';
 

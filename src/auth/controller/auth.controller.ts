@@ -14,7 +14,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { User } from 'src/user/entity/user.entity';
+import { User } from 'src/user/core/entity/user.entity';
 import { LoginUserDto } from '../dto/login-user.dto';
 import { Public } from 'src/common/decorators/public.decorator';
 import { RefreshTokenGuard } from 'src/common/guards/jwt-refresh.guard';

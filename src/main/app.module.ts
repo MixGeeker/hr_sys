@@ -15,6 +15,7 @@ import { UploadModule } from 'src/upload/upload.module';
 import { CurrencyModule } from 'src/currency/currency.module';
 import { SharedModule } from 'src/shared/shared.module';
 import { LogModule } from 'src/log/log.module';
+import { EmployeeModule } from 'src/employee/employee.module';
 
 @Module({})
 export class AppModule {
@@ -25,6 +26,7 @@ export class AppModule {
       UploadModule,
       CurrencyModule,
       LogModule,
+      EmployeeModule, // 添加EmployeeModule
     ];
 
     const imports = [
